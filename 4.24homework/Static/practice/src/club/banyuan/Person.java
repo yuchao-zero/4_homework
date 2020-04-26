@@ -4,12 +4,16 @@ public class Person {
 
   private String name;
   private int age;
-  private static int count = 0;  //
-  private int num = ++count; //
+  public static int count = 0;  //
+  //private int num = ++count; //
 
-  public int getNum(){  //
-    return num;
+  {
+    ++count;
   }
+
+  //public int getNum(){  //
+  //  return count;
+  //}
   public static int numberOfCall = 0;//
   public Person(String name, int age) {
     this.name = name;

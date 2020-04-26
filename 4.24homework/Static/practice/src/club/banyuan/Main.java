@@ -14,7 +14,7 @@ public class Main {
     //int c = lisi.getNum();
     //int d = wangwu.getNum();
 
-    System.out.printf("一共创建了%d个对象\n",zhaoliu.getNum());
+    System.out.printf("一共创建了%d个对象\n",Person.count);
     System.out.printf("两个参数的构造方法被调用了%d次\n",Person.numberOfCall);
 
   }
