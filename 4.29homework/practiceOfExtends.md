@@ -393,7 +393,7 @@ public class MainClass extends A
 		a = new int[5];
 	}
 
-	{
+	{   //调用自身的实例成员
 		System.out.println(a[0]);
 	}
 
@@ -402,4 +402,113 @@ public class MainClass extends A
 		MainClass main = new MainClass();
 	}
 }
+//0
+```
+13. 
+```
+class A
+{
+	static int i;//1. i==0
+
+	static
+	{
+		i++; //2. i==1
+	}
+
+	{
+		++i; //4. i==1
+	}
+}
+
+class B extends A
+{
+	static
+	{
+		--i; //3. i==0
+	}
+
+	{
+		i--;  //5. i==0
+	}
+}
+
+public class MainClass
+{
+	public static void main(String[] args)
+	{
+		System.out.println(new B().i);
+	}
+}
+//0
+```
+14. 
+```
+public class MainClass
+{
+	public MainClass(int i, int j)
+	{
+		System.out.println(method(i, j));
+	}
+	
+	int method(int i, int j)
+	{
+		return i++ + ++j;//注意i++表达式的值是i自增前的值
+	}
+	
+	public static void main(String[] args) 
+	{
+		MainClass main = new MainClass(10, 20);
+	}
+}
+//31
+```
+15. 
+```
+class X
+{
+	static
+	{
+		Y.methodOfY();
+	}
+}
+
+class Y extends X
+{
+	static void methodOfY()
+	{
+		System.out.println("Hi....");
+	}
+}
+
+public class MainClass
+{
+	public static void main(String[] args)
+	{
+		Y.methodOfY();
+	}
+}
+//同包下default类可以相互访问
+//输出两次
+```
+16. 
+```
+class ClassOne
+{
+	static int i = 111;
+	
+	int j = 222;
+	
+	{
+		i = i++ - ++j;
+	}
+}
+
+class ClassTwo extends ClassOne
+{
+	{
+		j = i-- + --j;
+	}
+}
+```
+
 
