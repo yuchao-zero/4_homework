@@ -245,10 +245,10 @@ class Y extends X
 class X
 {
     int m = 1111;
- 
+    //父类的构造代码块优先于子类执行
     {
-        m = m++;//m先赋值，再自增 -> m = 1111
-// 根据下一题 为什么这里能加载输出 13题不行？
+        m = m++;
+    //m先自增，将m自增之前的值赋给左边
         System.out.println(m); //1111
     }
 }
@@ -261,8 +261,11 @@ class Y extends X
  
     int methodOfY()
     {    //单目运算符优先级一样都是最高
-        return m-- + --m;//m-- == 1110
-                          //--m == 1110 
+        //  m--这个表达式的值是m自减前的值
+        //m本身的值是经过自减后的值
+        return m-- + --m;
+                           
+        //java运算从左往右
     }
 }
  
@@ -273,12 +276,14 @@ public class MainClass
         Y y = new Y();
     }
 }
+//构造代码块优先于构造方法执行
+//父类的构造方法优先于子类的构造方法被创造
 ```
 13. 
 ```
 class A
 {
-	void A()
+	void A() //不是构造方法 是实例方法。void是void返回值
 	{
 		System.out.println(1);
 	}
@@ -288,7 +293,7 @@ class B extends A
 {
 	void B()
 	{
-		A();
+		A();    //调用构造方法
 	}
 }
 
@@ -338,7 +343,7 @@ public class MainClass
 
 		System.out.println(a.i);//2121
 
-		System.out.println(b.i);//1212其实还是原来的值
+		System.out.println(b.i);//1212其实还是原来的值。本身继承来的值
 	}
 }
 ```
