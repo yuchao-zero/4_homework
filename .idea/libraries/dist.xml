@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="dist">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/4.28homework/ThreePratyJar/practice/dist/main.jar!/" />
+      <root url="jar://$PROJECT_DIR$/4.28homework/ThreePratyJar/practice/dist/Dog.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
