@@ -156,9 +156,9 @@ public class MainClass
     }
 }
 //main方法里面创建了类A的一个对象，
-//加载类A的时候首先加载了A的静态部分，
-//类C是类A的成员内部类，类A已创建对象
-//递归？
+//静态内部类只有在创建对象的时候才会被加载
+//内部类不会在其外部类被加载的同时被加载
+//递归死循环，new B的时候new了 A，new A的时候又去new B 循环调用
 ```
 
 #### 9. 以下代码能否通过编译，为什么//
@@ -201,9 +201,10 @@ public class MainClass
 {
     public static void main(String[] args)
     {
-        A a = new A() { };//抽象类不能实例化
+        A a = new A() { };//创建了一个A的子类，并且是一个局部内部类
     }
 }
+//顺序打印 2 1
 ```
 #### 11.//
 ```
@@ -259,7 +260,7 @@ class A
         new B().methodTwo();
     }
 }
-//不能通过编译。内部类依赖于外部类的实例创建对象
+//不能通过编译。局部内部类依赖于外部类的实例创建对象
 ```
 
 #### 13//
@@ -395,7 +396,7 @@ class P
             }
         }
          
-        return new Q().s+s;
+        return new Q().s+s; //s是外部类方法的s。如果在外部类使用内部类成员变量，需要使用内部类对象引用
     }
 }
  
@@ -410,11 +411,11 @@ public class MainClass
 }
 //输出PPP
 //输出PPPQQQ
-//输出PPPQQQPPPQQQ？
+//输出PPPQQQPPP
 
 ```
 
-#### 17. 
+#### 17. //
 
 ```
 class A
@@ -452,27 +453,27 @@ public class MainClass
     {
         A a = new A();
          
-        a.methodA1(10);
+        a.methodA1(10);//输出：21
          
-        a.methodA2(10);
+        a.methodA2(10);//输出：0
          
         B b = new B();
          
-        b.a.methodA1(10);
+        b.a.methodA1(10);//输出22
          
-        b.a.methodA2(10);
+        b.a.methodA2(10);//输出1
     }
 }
 
 ```
 
-#### 18. 以下代码能否通过编译，为什么
+#### 18. 以下代码能否通过编译，为什么//
 ```
 class One
 {
     void methodOne()
     {
-        public class Two
+        public class Two //编译报错。局部内部类（和局部变量一样）不能被访问修饰符修饰
         {
              
         }
@@ -481,7 +482,7 @@ class One
 ```
 
 
-#### 19.
+#### 19.//
 
 ```
 class One
@@ -519,11 +520,11 @@ public class MainClass
 {
     public static void main(String[] args)
     {
-        One one = new One();
+        One one = new One(); //打印THREE ONE
          
-        One.Two two = one.new Two();
+        One.Two two = one.new Two();//打印TWO
          
-        One.Three three = new One.Three();
+        One.Three three = new One.Three();//打印FIVE FOUR
     }
 }
 ```
@@ -543,9 +544,10 @@ class A
         }
     }
 }
+//???
 ```
 
-#### 21.
+#### 21.//
 ```
 abstract class X
 {
@@ -569,26 +571,29 @@ public class MainClass
 {
     public static void main(String[] args)
     {
+        //抽象类X的子类
         new X() 
         {   
-            void methodX()
+            void methodX() //重写父类X的方法
             {
                 System.out.println(s1+" "+s2);
             }
-        }.methodX();
-         
+        }.methodX();//匿名内部类的写法，构成多态，调用的是子类（匿名内部类）的方法
+         //打印STATIC NON-STATIC
+        
+        //抽象静态内部类的子类
         new X.Y() 
         {   
-            void methodY() 
+            void methodY() //重写内部类Y的方法
             {
                 System.out.println(s1+" "+s2);
             }
-        }.methodY();
+        }.methodY();//打印NON-STATIC STATIC
     }
 }
 ```
 
-#### 22. 在下面的示例中，如何访问“内部类”的“i”字段？
+#### 22. 在下面的示例中，如何访问“内部类”的“i”字段？//
 ```
 class OuterClass
 {
@@ -597,9 +602,10 @@ class OuterClass
         int i;
     }
 }
+//实例化内部类，通过内部类的对象调用：new OuterClass.InnerClass().i
 ```
 
-#### 23.
+#### 23.//
 ```
 class X
 {   
@@ -630,9 +636,11 @@ public class MainClass
         new X();
     }
 }
+//程序正常结束，不输出内容。因为成员内部类的构造代码块只有在加载内部类的时候才被加载，无论成员内部类是不是在外部类的静态代码块还是构造代码块
+//而内部类的加载需要new内部类的对象来触发
 ```
 
-#### 24.
+#### 24.//
 ```
 class A
 {   
@@ -642,6 +650,7 @@ class A
     }
      
     {
+        //抽象内部类的子类对象
         new B()
         {
              
@@ -661,9 +670,10 @@ public class MainClass
         new A();
     }
 }
+//打印BBB
 ```
 
-#### 25.
+#### 25.//
 ```
 class X
 {   
@@ -671,7 +681,7 @@ class X
     {
         class Y
         {
-            static void methodY()
+            static void methodY()//编译报错。非静态局部内部类不能有静态方法
             {
                  
             }
@@ -692,9 +702,10 @@ class A
         }
     }
 }
+//???
 ```
 
-#### 27.
+#### 27.//
 ```
 public class Outer 
 { 
@@ -707,7 +718,7 @@ public class Outer
 	{ 
 		private static int temp5 = 5; 
 		
-		private static int getSum() 
+		private static int getSum() //静态方法不能调用非静态成员
 		{ 
 			return (temp1 + temp2 + temp3 + temp4 + temp5); 
 		} 
@@ -723,7 +734,7 @@ public class Outer
 
 ```
 
-#### 28.
+#### 28.//
 ```
 public class Outer  
 { 
@@ -744,13 +755,13 @@ public class Outer
       
     public static void main(String[] args) 
     { 
-        System.out.println(data * LocalClass()); 
+        System.out.println(data * LocalClass()); //输出200
     } 
 } 
 
 ```
 
-#### 29.
+#### 29.//
 ```
 interface Anonymous 
 { 
@@ -761,7 +772,7 @@ public class Outer
 	private int data = 15; 
 	public static void main(String[] args) 
 	{ 
-		Anonymous inner = new Anonymous() 
+		Anonymous inner = new Anonymous()//匿名内部类 
 				{ 
 					int data = 5; 
 					public int getValue() 
@@ -777,10 +788,11 @@ public class Outer
 		System.out.println(inner.getValue() + inner.getData() + outer.data); 
 	} 
 } 
+//匿名内部类中存在独有方法，无法调用
 
 ```
 
-#### 30.
+#### 30.//
 ```
 public class Outer 
 { 
@@ -808,18 +820,19 @@ public class Outer
     { 
         Outer outer = new Outer(); 
         Outer.Inner inner = outer.new Inner(); 
-        System.out.printf("%d", outer.getData()); 
+        System.out.printf("%d", outer.getData()); //没有换行符
         inner.main(args); 
     } 
 } 
+//打印1020
 ```
 
-#### 31.
+#### 31.//
 ```
-interface OuterInterface 
+interface OuterInterface //外部接口
 { 
     public void InnerMethod(); 
-    public interface InnerInterface 
+    public interface InnerInterface //内部接口，默认static
     { 
         public void InnerMethod(); 
     } 
@@ -835,7 +848,7 @@ public class Outer implements OuterInterface.InnerInterface, OuterInterface
     public static void main(String[] args) 
     { 
         Outer obj = new Outer(); 
-        obj.InnerMethod(); 
+        obj.InnerMethod(); //输出100
     } 
 } 
 ```
