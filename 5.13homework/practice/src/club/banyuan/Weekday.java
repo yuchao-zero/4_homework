@@ -21,10 +21,10 @@ public enum Weekday {
         return this.typeDay;
     }
 
-    public static Weekday valueofTypeDay(String typeDay){//返回对象实例
+    public static Weekday valueOfTypeDay(String typeDay) {//返回对象实例
         Weekday[] values = values();
         for (Weekday one : values()) {
-            if(one.typeDay.equals(typeDay)){
+            if (one.typeDay.equals(typeDay)) {
                 return one;
             }
         }
@@ -35,16 +35,11 @@ public enum Weekday {
         return typeDay;
     }
 
-    public boolean isWeekDay(){
-        if(this.typeDay.equals("saturday") || this.typeDay.equals("sunday")) {
-            return false;
-        }
-        return true;
+    public boolean isWeekDay() {
+        return !isHoliday();
     }
-    public boolean isHoliday(){
-        if(this.isWeekDay()) {
-            return false;
-        }
-        return true;
+
+    public boolean isHoliday() {
+        return this == SATURDAY || this == SUNDAY;
     }
 }
