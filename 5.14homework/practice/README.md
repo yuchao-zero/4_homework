@@ -3,9 +3,9 @@
 class Main {
    public static void main(String args[]) {
       try {
-         throw 10; //语法错误，int数据类型无法转换成throwable数据类型
+         throw 10; //语法错误，throw后面吗必须是throwable的对象或者其子类的对象
       }
-      catch(int e) {
+      catch(int e) {////语法错误，throw后面吗必须是throwable的对象或者其子类的对象
          System.out.println("Got the  Exception " + e);
       }
   }
@@ -92,9 +92,9 @@ class Test
         }
     }
 }
-//打印a = 0
+//打印a = 0   
 //打印Divide by zero error
-//打印Divide by zero error
+//打印inside the finally block
 ```
 #### 6.
 ```
@@ -153,13 +153,14 @@ class Test
         catch(Exception e)
         {
             throw new Exception(); //方法体内的异常在finally执行之后抛出
+            //catch里面抛了异常，但是没有被此方法处理，所以此方法中非finally代码块中的程序不会被执行
         }
         finally
         {
             str += "e"; //abde
         }
  
-        str += "f"; //异常发生时，方法体内剩下的程序不会被执行
+        str += "f"; //异常发生时，方法体内剩下的程序不会被执行(因为catch抛了异常，方法体内没有catch接住并处理）
  
     }
      
@@ -189,8 +190,7 @@ class Test
 class Test
 {   int count = 0;
  
-    void A() throws Exception
-    {
+    void A() throws Exception { //因为方法中catch到异常后没有抛出，方法签名中的throws Exception声明可以取消
         try
         {
             count++;
@@ -289,11 +289,45 @@ public int myMethod(){
 
       System.out.println("IOException called!!!");
 
-    } 
+    }
+//打印 FileNotFoundException called!!!
+//打印 IOException called!!!
 
 ```
 #### 11.
 
+```
+public class Test {
+ 
+    private static String result = "";
+ 
+    public static void main(String[] args) {
+        test(1);//返回值result值是"1245"
+        result += "*";//"1245*"
+        test(0);
+        System.out.println(result);
+    }
+ 
+    public static void test(int i) {
+ 
+        result += "1"; //1//1245*1
+        try {
+            if (i == 0) {  //false
+                throw new RuntimeException("");
+            }
+            result += "2";
+        } catch (Exception e) {
+            result += "3"; //1245*13
+            return; //
+        } finally {
+            result += "4";
+        }
+        result += "5";
+    }
+}
+```
+
+###
 ```
 try {
 
@@ -309,4 +343,5 @@ try {
       System.out.println("IOException called!!!");
 
     } 
+//FileNotFoundException是IOException的子类
 ```
