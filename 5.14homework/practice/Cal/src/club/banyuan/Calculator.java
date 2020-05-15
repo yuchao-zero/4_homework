@@ -1,6 +1,6 @@
 package club.banyuan;
 
-import static java.lang.Integer.valueOf;
+import static java.lang.Integer.parseInt;
 
 /**
  * Calculator类提供了用于解析包含简单表达式的输入字符串以及计算表达式结果的功能。
@@ -56,7 +56,7 @@ public class Calculator {
                 // 只有一种情况，用户输入 负数
                 // TODO: complete the cases
                 if (tokens[0].equals("-") && isNumeric(tokens[1])) {
-                    return -valueOf(tokens[1]);
+                    return -parseInt(tokens[1]);
                 }else if(tokens[0].equals("-") && !isNumeric(tokens[1])){
                     throw new IllegalInputException("Illegal Argument");
                 }else {
@@ -67,17 +67,17 @@ public class Calculator {
                 // 计算表达式
                 // TODO: complete the cases
                 if(isNumeric(tokens[0]) && tokens[1].equals("+") && isNumeric(tokens[2])){
-                    return valueOf(tokens[0]) + valueOf(tokens[2]);
+                    return Integer.parseInt(tokens[0]) + Integer.parseInt(tokens[2]);
                 }else if(isNumeric(tokens[0]) && tokens[1].equals("/") && tokens[2].equals("0")){
                     throw new DivideByZeroException();
-                }else if(isNumeric(tokens[0]) && tokens[1].equals("/") && isNumeric(tokens[2]) && valueOf(tokens[2]) !=0){
-                    return valueOf(tokens[0]) / valueOf(tokens[2]);
+                }else if(isNumeric(tokens[0]) && tokens[1].equals("/") && isNumeric(tokens[2]) && Integer.parseInt(tokens[2]) !=0){
+                    return Integer.parseInt(tokens[0]) / Integer.parseInt(tokens[2]);
                     //Todo  (unexpected output)need to modify
-                }else if((!isNumeric(tokens[0]) && isNumeric(tokens[1]) && isNumeric(tokens[2])) ||
-                        (isNumeric(tokens[1]) && !isNumeric(tokens[1]) && !isNumeric(tokens[2]))){
-                    throw new IllegalInputException("Illegal Argument");
-                }else {
+                    //it's ok
+                }else if(isNumeric(tokens[0]) && isNumeric(tokens[2]) && !(tokens[1].equals("+") || tokens[1].equals("/"))){
                     throw new IllegalInputException("Illegal Operator");
+                }else {
+                    throw new IllegalInputException("Illegal Argument");
                 }
 
             default:
@@ -88,6 +88,11 @@ public class Calculator {
 
     }
 
+    /**
+     *
+     * @param str
+     * @return 字符串是否是数字
+     */
     public static boolean isNumeric(String str) {
         for (int i = str.length(); --i >= 0; ) {
             if (!Character.isDigit(str.charAt(i))) {
@@ -95,6 +100,15 @@ public class Calculator {
             }
         }
         return true;
+    }
+
+    /**
+     * 将字符串转换成整数
+     * @param str
+     * @return int
+     */
+    public static int toNum(String str){
+        return parseInt(str);
     }
 
     /**
@@ -145,11 +159,12 @@ public class Calculator {
         finally {
             System.out.print("Input was: ");
             for (String t:tokens
-                 ) {
+            ) {
                 System.out.print(t + " ");
             }
             System.out.println();
         }
         return false;
     }
+
 }
