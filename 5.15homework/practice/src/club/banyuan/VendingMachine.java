@@ -3,6 +3,8 @@ package club.banyuan;
 import java.util.Scanner;
 
 public class VendingMachine {
+
+    //TODO 整个文件出现大篇幅重复代码，优化
     /**
      * 用户塞入硬币，balanceOfMachine的值为塞入硬币的总和
      * 用户买了产品，balanceOfMachine的值为塞入硬币的总和减去产品的价格
@@ -43,8 +45,8 @@ public class VendingMachine {
                 default:
                     System.out.println("Invalid choice!");
             }
-            // TODO 如果选择了选项0，程序应当返回主菜单，返回之前打印售货机信息
-            //TODO 将整个嵌套的switch封装成一个方法试试
+            //  如果选择了选项0，程序应当返回主菜单，返回之前打印售货机信息
+            // 将整个嵌套的switch封装成一个方法试试
             if (selectCoin == 0) {
                 return;
             }
@@ -204,15 +206,15 @@ public class VendingMachine {
     }
 
     public static void switchOfAdminServiceMenu() {
+        System.out.println();
         while (true) {
-            System.out.println();
             Print.displayAdminServiceMenu();
             System.out.print("Your choice:");
             int selectCoin = new Scanner(System.in).nextInt();
             switch (selectCoin) {
                 case 1:
                     System.out.println("(9-1) Machine status");
-                    //TODO 计算收入
+                    // 计算收入
                     System.out.println("Amount of revenue: $" + income);
                     System.out.println("Amount of inserted coins: $" + balanceOfMachine);
                     for (int i = 0; i < Production.values().length; i++) {
@@ -234,11 +236,9 @@ public class VendingMachine {
                     balanceOfMachine = 0;
                     break;
                 case 3:
-                    Print.displayRefill_Product_Menu();
                     switch_Of_Refill_Product_Menu();
                     break;
                 case 4:
-                    Print.displayChange_ProductionMenu();
                     switchOfChangeProduction();
                     break;
                 case 0:
@@ -250,115 +250,101 @@ public class VendingMachine {
                 return;
             }
             System.out.println();
-           // Print.displayVending();//测试阶段出现界面，尝试取消
-
         }
     }
 
-    //TODO 如果在服务菜单中选择了选项3，将显示一个子菜单，供用户选择要补充库存到全部数量的产品（固定为10）。然后将再次显示服务菜单
+    /**
+     * 如果在服务菜单中选择了选项3，将显示一个子菜单，供用户选择要补充库存到全部数量的产品（固定为10）。然后将再次显示服务菜单
+     */
     public static void switch_Of_Refill_Product_Menu() {
-        while (true) {
-            System.out.println();
-            Print.displayAdminServiceMenu();
-            System.out.print("Your choice:");
-            int selectCoin = new Scanner(System.in).nextInt();
-            switch (selectCoin) {
-                case 1:
-                    System.out.println("You have refilled product A to full.");
-                    Production.JUICE.left = 10;
-                    //Print.displayAdminServiceMenu();
-                    break;
-                case 2:
-                    System.out.println("You have refilled product B to full.");
-                    Production.COLA.left = 10;
-                    //Print.displayAdminServiceMenu();
-                    break;
-                case 3:
-                    System.out.println("You have refilled product C to full.");
-                    Production.TEA.left = 10;
-                    //Print.displayAdminServiceMenu();
-                    break;
-                case 4:
-                    System.out.println("You have refilled product D to full.");
-                    Production.WATER.left = 10;
-                    //Print.displayAdminServiceMenu();
-                    break;
-                case 5:
-                    System.out.println("You have refilled product E to full.");
-                    Production.COFFEE.left = 10;
-                    //Print.displayAdminServiceMenu();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Invalid choice!");
-            }
-            if (selectCoin == 0) {
-                return;
-            }
-            System.out.println();
-
-            //TODO change the BUG :如果增加了打印售货机界面的方法，会发现B的信息还是"X"
-            //Print.displayVending();
+        Print.displayRefill_Product_Menu();
+        System.out.print("Your choice:");
+        int selectCoin = new Scanner(System.in).nextInt();
+        switch (selectCoin) {
+            case 1:
+                System.out.println("You have refilled product A to full.");
+                Production.JUICE.left = 10;
+                break;
+            case 2:
+                System.out.println("You have refilled product B to full.");
+                Production.COLA.left = 10;
+                break;
+            case 3:
+                System.out.println("You have refilled product C to full.");
+                Production.TEA.left = 10;
+                break;
+            case 4:
+                System.out.println("You have refilled product D to full.");
+                Production.WATER.left = 10;
+                break;
+            case 5:
+                System.out.println("You have refilled product E to full.");
+                Production.COFFEE.left = 10;
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("Invalid choice!");
         }
+        //TODO change the BUG :如果增加了打印售货机界面的方法，会发现B的信息还是"X"
     }
 
     public static void switchOfChangeProduction() {
-        while (true) {
-            System.out.println();
-            System.out.print("Your choice:");
-            int selectCoin = new Scanner(System.in).nextInt();
-            switch (selectCoin) {
-                case 1:
-                    System.out.println("You are changing product A.");
-                    System.out.println("Enter new product name:" + new Scanner(System.in).next());
-                    System.out.println("Enter new product price:" + new Scanner(System.in).nextInt());
-                    Production.JUICE.left = 10;
-                    System.out.println("The new product E has been filled to full.");
-                    Print.displayAdminServiceMenu();
-                    break;
-                case 2:
-                    System.out.println("You are changing product B.");
-                    System.out.println("Enter new product name:" + new Scanner(System.in).next());
-                    System.out.println("Enter new product price:" + new Scanner(System.in).nextInt());
-                    Production.COLA.left = 10;
-                    System.out.println("The new product E has been filled to full.");
-                    Print.displayAdminServiceMenu();
-                    break;
-                case 3:
-                    System.out.println("You are changing product C.");
-                    System.out.println("Enter new product name:" + new Scanner(System.in).next());
-                    System.out.println("Enter new product price:" + new Scanner(System.in).nextInt());
-                    Production.TEA.left = 10;
-                    System.out.println("The new product E has been filled to full.");
-                    Print.displayAdminServiceMenu();
-                    break;
-                case 4:
-                    System.out.println("You are changing product D.");
-                    System.out.println("Enter new product name:" + new Scanner(System.in).next());
-                    System.out.println("Enter new product price:" + new Scanner(System.in).nextInt());
-                    Production.WATER.left = 10;
-                    System.out.println("The new product E has been filled to full.");
-                    Print.displayAdminServiceMenu();
-                    break;
-                case 5:
-                    System.out.println("You are changing product E.");
-                    System.out.println("Enter new product name:" + new Scanner(System.in).next());
-                    System.out.println("Enter new product price:" + new Scanner(System.in).nextInt());
-                    Production.COFFEE.left = 10;
-                    System.out.println("The new product E has been filled to full.");
-                    Print.displayAdminServiceMenu();
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.out.println("Invalid choice!");
-            }
-            if (selectCoin == 0) {
-                return;
-            }
-            System.out.println();
-            Print.displayVending();
+        Print.displayChange_ProductionMenu();
+        System.out.print("Your choice:");
+        int selectCoin = new Scanner(System.in).nextInt();
+        switch (selectCoin) {
+            case 1:
+                System.out.println("You are changing product A.");
+                System.out.print("Enter new product name:");
+                new Scanner(System.in).next();
+                System.out.print("Enter new product price:");
+                new Scanner(System.in).nextInt();
+                Production.JUICE.left = 10;
+                System.out.println("The new product E has been filled to full.");
+                break;
+            case 2:
+                System.out.println("You are changing product B.");
+                System.out.print("Enter new product name:");
+                new Scanner(System.in).next();
+                System.out.print("Enter new product price:");
+                new Scanner(System.in).nextInt();
+                Production.COLA.left = 10;
+                System.out.println("The new product E has been filled to full.");
+                break;
+            case 3:
+                System.out.println("You are changing product C.");
+                System.out.print("Enter new product name:");
+                new Scanner(System.in).next();
+                System.out.print("Enter new product price:");
+                new Scanner(System.in).nextInt();
+                Production.TEA.left = 10;
+                System.out.println("The new product E has been filled to full.");
+                break;
+            case 4:
+                System.out.println("You are changing product D.");
+                System.out.print("Enter new product name:");
+                new Scanner(System.in).next();
+                System.out.print("Enter new product price:");
+                new Scanner(System.in).nextInt();
+                Production.WATER.left = 10;
+                System.out.println("The new product E has been filled to full.");
+                break;
+            case 5:
+                System.out.println("You are changing product E.");
+                System.out.print("Enter new product name:");
+                new Scanner(System.in).next();
+                System.out.print("Enter new product price:");
+                new Scanner(System.in).nextInt();
+                Production.COFFEE.left = 10;
+                System.out.println("The new product E has been filled to full.");
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("Invalid choice!");
+
+            //TODO 有bug The new product E has been filled to full后，并没有进行处理
         }
     }
 

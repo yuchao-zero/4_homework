@@ -41,7 +41,7 @@ public class Menu {
      * 管理员更改产品菜单
      */
     private final static String[] change_ProductionMenu = new String[]{"(9-4) Which product would you like to change?","1. A",
-            " 2. B"," 3. C", " 4. D"," 5. E"," 0. Go back"};
+            "2. B","3. C", "4. D","5. E","0. Go back"};
 
     public static String[] getMainMenu() {
         return mainMenu;

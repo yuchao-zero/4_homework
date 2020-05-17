@@ -32,6 +32,13 @@ public class Main {
                     System.out.println("(4) Return button is pressed.");
                     System.out.println("$" + VendingMachine.getBalanceOfMachine() + " has been returned.");
                     VendingMachine.balanceOfMachine = 0;
+                    //需要判断一次产品是否可以被购买状态
+                    for (int i = 0; i < Production.values().length; i++) {
+                        if (VendingMachine.balanceOfMachine < Production.values()[i].getPrice()
+                                && Production.values()[i].canBePurchased != "X") {
+                            Production.values()[i].canBePurchased = " ";
+                        }
+                    }
                     Print.displayVending();
                     System.out.println();
                     break;
