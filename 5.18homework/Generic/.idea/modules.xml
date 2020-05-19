@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/practice/DataSet/DataSet.iml" filepath="$PROJECT_DIR$/practice/DataSet/DataSet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demo/Demo.iml" filepath="$PROJECT_DIR$/Demo/Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Generic.iml" filepath="$PROJECT_DIR$/.idea/Generic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GenericCollection/GenericCollection.iml" filepath="$PROJECT_DIR$/GenericCollection/GenericCollection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/practice/Pairs/Pairs.iml" filepath="$PROJECT_DIR$/practice/Pairs/Pairs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/practice/Points/Points.iml" filepath="$PROJECT_DIR$/practice/Points/Points.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Simulation/Simulation.iml" filepath="$PROJECT_DIR$/Simulation/Simulation.iml" />
+    </modules>
+  </component>
+</project>
