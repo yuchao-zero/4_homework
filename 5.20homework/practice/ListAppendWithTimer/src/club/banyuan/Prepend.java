@@ -26,7 +26,6 @@ public class Prepend implements Timer {
     /**
      * 计时器要保存的时间数据
      */
-    private long usedTime = 0;
     private long startTime;
     private long endTime;
     /**
@@ -72,7 +71,8 @@ public class Prepend implements Timer {
      */
     @Override
     public void reset() {
-        usedTime = 0;
+        startTime = 0;
+        endTime = 0;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Prepend implements Timer {
      */
     @Override
     public long getTimeMillisecond() {
-        return usedTime = endTime - startTime;
+        return endTime - startTime;
     }
 
     public static void main(String args[]) {
