@@ -1,15 +1,13 @@
 package club.banyuan;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class PersonalRecommendor implements Recommender {
     /**
      * 类包含一个名为Likes的HashMap，该HashMap将人的名字作为key， 映射到项目的（书，电影，歌曲等）名称的List。
      * 使用LinkedList类作为实现类。使用适当的访问修饰符可防止另一个类直接访问或编辑Likes。
      */
-    private final HashMap<String, List<String>> Likes = new HashMap<>();
+    private final Map<String, Set<String>> likes = new HashMap<>();
 
 
     /**
@@ -20,12 +18,12 @@ public class PersonalRecommendor implements Recommender {
      */
     @Override
     public void addLikes(String name, String project) {
-        if (Likes.containsKey(name)) {
-            Likes.get(name).add(project);
+        if (likes.containsKey(name)) {
+            likes.get(name).add(project);
         } else {
-            List<String> list = new LinkedList<>();
-            Likes.put(name, list);
-            list.add(project);
+            Set<String> set = new HashSet<>();
+            likes.put(name, set);
+            set.add(project);
         }
     }
 
@@ -41,12 +39,14 @@ public class PersonalRecommendor implements Recommender {
      * @return
      */
     @Override
-    public boolean likeBoth(String name, String oneProject, String anotherProject) throws UnknownPersonException {
-        if (!Likes.containsKey(name)) {
+    public boolean likeBoth(String name, String oneProject, String anotherProject) {
+        if (!likes.containsKey(name)) {
             throw new UnknownPersonException("未找到该人");
-        } else {
-            return Likes.get(name).contains(oneProject) && Likes.get(name).contains(anotherProject);
         }
+        return likes.get(name).contains(oneProject) && likes.get(name).contains(anotherProject);
+        //Set<String> projects = likes.get(name);
+        //return projects.containsAll(set.of(oneProject,anotherProject));
+        
     }
 
     /**
@@ -57,7 +57,8 @@ public class PersonalRecommendor implements Recommender {
      */
     @Override
     public List<String> recommendByPerson(String name) {
-        return Likes.get(name);
+        return new ArrayList<>(likes.get(name));
+        //return likes.get(name);
     }
 
     /**
@@ -69,14 +70,14 @@ public class PersonalRecommendor implements Recommender {
      */
     @Override
     public List<String> recommendByProject(String project) {
-        List<String> recommendLikes = new LinkedList<>();
-        for (List<String> likes : Likes.values()) {
+        Set<String> recommendLikes = new HashSet<>();
+        for (Set<String> likes : likes.values()) {
             if (likes.contains(project)) {
                 recommendLikes.addAll(likes);
-                recommendLikes.remove(project);
             }
         }
-        return recommendLikes;
+        recommendLikes.remove(project);
+        return new ArrayList<>(recommendLikes);
     }
 
     public static void main(String[] args) {

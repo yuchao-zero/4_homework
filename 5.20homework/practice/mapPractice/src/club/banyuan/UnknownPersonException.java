@@ -1,6 +1,6 @@
 package club.banyuan;
 
-public class UnknownPersonException extends Exception{
+public class UnknownPersonException extends RuntimeException{
 
     public UnknownPersonException() {
         super();
