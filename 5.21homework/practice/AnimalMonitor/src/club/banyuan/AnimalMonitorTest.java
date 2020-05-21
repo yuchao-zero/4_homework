@@ -38,8 +38,14 @@ public class AnimalMonitorTest {
 
     animalMonitor.setSightings(sightings);
 
-
-
+    //System.out.println(animalMonitor.getAnimalBy(1,1));
+    animalMonitor.printList();
+    System.out.println("-------------------------------------------");
+    animalMonitor.printSightingsOf("水牛");
+    System.out.println("-------------------------------------------");
+    animalMonitor.printSightingsBy(0);
+    System.out.println("-------------------------------------------");
+    //animalMonitor.printEndangered(sightings.,3);
     animalMonitor.printCounts("水牛");
     animalMonitor.printCounts("大象");
   }

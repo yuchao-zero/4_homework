@@ -1,7 +1,9 @@
 package club.banyuan;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 监视不同种类动物的数量。由观察者记录目击事件。
@@ -57,11 +59,13 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public void printSightingsBy(int spotter) {
+    Set<String> noDuplicatesAnimal = new HashSet<>();
     for (Sighting sighting : this.sightings) {
       if (sighting.getSpotter() == spotter) {
-        System.out.println("该观察者的所有目击动物为：" + sighting.getAnimal());
+        noDuplicatesAnimal.add(sighting.getAnimal());
       }
     }
+    System.out.println("该观察者的所有目击动物为：" + noDuplicatesAnimal);
   }
 
   /**
@@ -210,7 +214,7 @@ public class AnimalMonitorImpl implements AnimalMonitor {
   @Override
   public List<String> getAnimalBy(int spotter, int period) {
     List<Sighting> list = new ArrayList<>();
-    List<String> animalName = null;
+    List<String> animalName = new ArrayList<>();
     for (int i = 0; i < sightings.size(); i++) {
       if (sightings.get(i).getCount() == 0) {
         list.add(sightings.remove(i)); //删除数量等于零的动物
@@ -231,7 +235,7 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public List<Integer> getSpotterBy(String animal, int period) {
-    List<Integer> spotter = null;
+    List<Integer> spotter = new ArrayList<>();
     for (Sighting sighting : sightings) {
       if (sighting.getAnimal().equals(animal) && sighting.getPeriod() == period) {
         spotter.add(sighting.getSpotter());
