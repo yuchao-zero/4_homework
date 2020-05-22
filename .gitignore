@@ -1,3 +1,6 @@
-*.iml
-/**/a.out
-/**/out
+*
+!*/
+!*.java
+!*.md
+!*.jar
+!.gitignore
