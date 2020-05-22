@@ -108,4 +108,5 @@ public class LinkedList implements List {
   public int size() {
     return size;
   }
+
 }

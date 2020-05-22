@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * 监视不同种类动物的数量。由观察者记录目击事件。
@@ -13,19 +15,11 @@ public class AnimalMonitorImpl implements AnimalMonitor {
   // 记录所有发现的动物。
   private List<Sighting> sightings;
 
-  public List<Sighting> getSightings() {
-    return sightings;
-  }
-
-  public void setSightings(List<Sighting> sightings) {
-    this.sightings = sightings;
-  }
-
   /**
    * 创建一个AnimalMonitor。
    */
   public AnimalMonitorImpl() {
-    this.sightings = new ArrayList<>();
+    this.sightings = new SightingFiller().getSightings();
   }
 
   /**
@@ -33,9 +27,15 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public void printList() {
-    for (Sighting sighting : this.sightings) {
-      System.out.println(sighting.getDetails());
-    }
+//    for (Sighting sighting : this.sightings) {
+//      System.out.println(sighting.getDetails());
+//    }
+    sightings.forEach(this::printList);
+
+  }
+
+  private void printList(Sighting sighting) {
+    System.out.println(sighting.getDetails());
   }
 
   /**
@@ -45,11 +45,14 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public void printSightingsOf(String animal) {
-    for (Sighting sighting : this.sightings) {
-      if (sighting.getAnimal().equals(animal)) {
-        System.out.println(sighting.getDetails());
-      }
-    }
+//    for (Sighting sighting : this.sightings) {
+//      if (sighting.getAnimal().equals(animal)) {
+//        System.out.println(sighting.getDetails());
+//      }
+//    }
+    sightings.stream()
+        .filter(sighting -> sighting.getAnimal().equals(animal))
+        .forEach(this::printList);
   }
 
   /**
@@ -59,13 +62,22 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public void printSightingsBy(int spotter) {
-    Set<String> noDuplicatesAnimal = new HashSet<>();
-    for (Sighting sighting : this.sightings) {
-      if (sighting.getSpotter() == spotter) {
-        noDuplicatesAnimal.add(sighting.getAnimal());
-      }
-    }
-    System.out.println("该观察者的所有目击动物为：" + noDuplicatesAnimal);
+//    Set<String> noDuplicatesAnimal = new HashSet<>();
+//    for (Sighting sighting : this.sightings) {
+//      if (sighting.getSpotter() == spotter) {
+//        noDuplicatesAnimal.add(sighting.getAnimal());
+//      }
+//    }
+//    System.out.println("该观察者的所有目击动物为：" + noDuplicatesAnimal);
+    sightings.stream().filter(sighting -> sighting.getSpotter() == spotter)
+        //返回一个新流，数据类型为右侧的元素数据类型
+        .map(Sighting::getAnimal)
+        .distinct()
+        .forEach(this::printList);
+  }
+
+  private void printList(String s) {
+    System.out.println(s);
   }
 
   /**
@@ -76,11 +88,17 @@ public class AnimalMonitorImpl implements AnimalMonitor {
    */
   @Override
   public void printEndangered(List<String> animalNames, int dangerThreshold) {
+    List<String> list = new ArrayList<>();
     for (String animalName : animalNames) {
-      if (animalName.length() <= dangerThreshold) {
-        System.out.println("濒临灭绝的动物：" + animalName);
+      if (getCount(animalName) <= dangerThreshold) {
+        list.add(animalName);
       }
     }
+    System.out.print("濒临灭绝的动物：");
+    for (String s : list) {
+      System.out.print(s + " ");
+    }
+    System.out.println();
   }
 
   /**
@@ -111,13 +129,11 @@ public class AnimalMonitorImpl implements AnimalMonitor {
   @Override
   public List<Sighting> printSightingsOfInPeriod(int fromPeriod, int toPeriod, String animal) {
     List<Sighting> list = new ArrayList<>();
-    while (fromPeriod != toPeriod) {
-      for (Sighting sighting : this.sightings) {
-        if (sighting.getPeriod() == fromPeriod && sighting.getAnimal().equals(animal)) {
-          list.add(sighting);
-          System.out.println(sighting.getDetails());
-          fromPeriod++;
-        }
+    for (Sighting sighting : this.sightings) {
+      if (sighting.getPeriod() >= fromPeriod && sighting.getPeriod() <= toPeriod && sighting
+          .getAnimal().equals(animal)) {
+        list.add(sighting);
+        System.out.println(sighting.getDetails());
       }
     }
     return list;
