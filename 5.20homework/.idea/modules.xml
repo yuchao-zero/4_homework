@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/5.20homework.iml" filepath="$PROJECT_DIR$/.idea/5.20homework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/practice/ListAppendWithTimer/ListAppendWithTimer.iml" filepath="$PROJECT_DIR$/practice/ListAppendWithTimer/ListAppendWithTimer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/practice/mapPractice/mapPractice.iml" filepath="$PROJECT_DIR$/practice/mapPractice/mapPractice.iml" />
+    </modules>
+  </component>
+</project>
