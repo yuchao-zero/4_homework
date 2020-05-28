@@ -11,7 +11,6 @@ public class Encode {
   public static final int FIRST_LOWER = 97;
   public static final int NUM_CHARS = 26;
   public static final int OFFSET = 3;
-`
 
   public static void main(String[] args) throws IOException {
     BufferedReader inStream = null;
