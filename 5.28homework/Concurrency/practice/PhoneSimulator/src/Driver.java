@@ -21,6 +21,6 @@ public class Driver {
       // 必须要处理的join抛出的异常
       System.exit(1);
     }
-    System.exit(0);
+    //System.exit(0);
   }
 }
