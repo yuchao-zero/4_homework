@@ -2,15 +2,15 @@ package thread.pool.philosopher;
 
 public class AbstractPhilosopher extends Thread {
 
-  public static int eatNums = 0;
-  public static int successEatNums = 0;
-  public static int thinkingNums = 0;
+  public static int eatTimes = 0;
+  public static int successEatTimes = 0;
+  public static int thinkingTimes = 0;
 
   private Chopsticks left;
   private Chopsticks right;
 
   public void eat() {
-    eatNums++;
+    eatTimes++;
     //System.out.println(Thread.currentThread() == this);
     //System.out.println(Thread.currentThread());
     //System.out.println(this);
@@ -37,11 +37,11 @@ public class AbstractPhilosopher extends Thread {
     left.put();
     right.put();
     System.out.println(getName() + ",吃饭结束");
-    successEatNums++;
+    successEatTimes++;
   }
 
   public void thinking() {
-    thinkingNums++;
+    thinkingTimes++;
     System.out.println(getName() + ",思考");
     try {
       Thread.sleep(200);

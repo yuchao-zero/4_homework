@@ -6,7 +6,7 @@ import java.util.Random;
 // 统计哲学家一共吃了多少次饭，多少次吃饭成功，一共进行了多少次思考
 public class Philosopher extends AbstractPhilosopher {
 
-  public static boolean exit = true;
+  public static volatile boolean exit = true;
 
   private Chopsticks[] chopsticks;
   private int code;

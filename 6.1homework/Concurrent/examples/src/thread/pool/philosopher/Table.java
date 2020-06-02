@@ -1,10 +1,5 @@
 package thread.pool.philosopher;
 
-import java.util.Arrays;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class Table {
 
   public static void main(String[] args) {
@@ -51,9 +46,9 @@ public class Table {
       System.out.println(philosopher.getState());
     }
     System.out.println("---------------------------------------");
-    System.out.println("哲学家吃饭次数" + AbstractPhilosopher.eatNums);
+    System.out.println("哲学家吃饭次数" + AbstractPhilosopher.eatTimes);
     System.out
-        .println("哲学家成功吃饭次数" + (AbstractPhilosopher.successEatNums));
-    System.out.println("哲学家思考次数" + AbstractPhilosopher.thinkingNums);
+        .println("哲学家成功吃饭次数" + (AbstractPhilosopher.successEatTimes));
+    System.out.println("哲学家思考次数" + AbstractPhilosopher.thinkingTimes);
   }
 }
