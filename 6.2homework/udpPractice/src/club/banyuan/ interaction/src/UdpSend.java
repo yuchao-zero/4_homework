@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.util.Scanner;
 
 public class UdpSend {
-
   public static void main(String[] args) throws IOException {
     DatagramSocket ds = new DatagramSocket();
     Scanner scanner = new Scanner(System.in);
