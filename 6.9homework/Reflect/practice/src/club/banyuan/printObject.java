@@ -12,7 +12,6 @@ public class printObject {
   public static void main(String[] args) {
     printInfo("a");
   }
-
   public static void printInfo(Object o) {
     Class<?> aClass = o.getClass();
 
