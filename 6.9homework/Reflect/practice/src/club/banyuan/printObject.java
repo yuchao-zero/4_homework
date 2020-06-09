@@ -1,13 +1,11 @@
 package club.banyuan;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 public class printObject {
 
@@ -17,18 +15,22 @@ public class printObject {
 
   public static void printInfo(Object o) {
     Class<?> aClass = o.getClass();
-    List<String> list = new ArrayList<>();
-    Method[] methods = aClass.getMethods();
-    for (Method m : methods) {
-      list.add(m.getName());
-    }
-    sort(list);
-    for (int i = 0; i < list.size(); i++) {
-      System.out.println(list.get(i));
-    }
-  }
 
-  public static void sort(List<String> list) {
-    list.sort(String::compareTo);
+    Field[] fields = aClass.getDeclaredFields();
+    Method[] methods = aClass.getDeclaredMethods();
+
+    List<Method> list = new ArrayList<>(Arrays.asList(methods));
+    List<Field> list1 = new ArrayList<>(Arrays.asList(fields));
+
+    list.sort((Comparator.comparing(Method::getName)));
+    list1.sort((Comparator.comparing(Field::getName)));
+
+    for (Method method : list) {
+      System.out.println(method);
+    }
+    System.out.println("--------------------------------");
+    for (Field field : list1) {
+      System.out.println(field);
+    }
   }
 }
