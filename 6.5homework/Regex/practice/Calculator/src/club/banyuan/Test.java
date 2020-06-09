@@ -16,7 +16,8 @@ public class Test {
 //    int b = scanner.nextInt();
 //    System.out.println(a + b);
     //System.out.println("接收完毕");
-    Class<Test> testClass = Test.class;
+    //Class<Test> testClass = Test.class;
     //testClass.getMethod(test);
+    System.out.println("再接收："+scanner.nextInt());
   }
 }
