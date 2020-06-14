@@ -1,0 +1,93 @@
+<!-- 伪元素形式 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .container{
+                position: relative;
+                width: 500px;
+            }
+            img{
+                width: 500px;
+                height: 50px;
+            }
+            img::before{
+                content: " ";
+                /* display: block; */
+                position: absolute;
+                top: -10px;
+                left: 0;
+                height: calc(100% + 10px);
+                width: 100%;
+                background-color: rgb(230, 230, 230);
+                border: 2px dotted rgb(200, 200, 200);
+                /* 改变外边框形状 */
+                border-radius: 5px;
+            }
+            img::after{
+                content: " Broken Image of " attr(alt);
+                /* display: block; */
+                font-size: 16px;
+                font-style: normal;
+                color: rgb(100, 100, 100);
+                position: absolute;
+                top: 5px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img src="cover.jpg" alt="test" style="line-height: 50px;">
+        </div>
+    </body>
+</html>
+
+<!-- 正常形式 -->
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .container{
+                position: relative;
+                width: 500px;
+            }
+            img{
+                width: 500px;
+                height: 50px;
+            }
+
+            .before{
+                position: absolute;
+                top: -10px;
+                left: 0;
+                height: calc(100% + 10px);
+                width: 100%;
+                background-color: rgb(230, 230, 230);
+                border: 2px dotted rgb(200, 200, 200);
+                /* 改变外边框形状 */
+                border-radius: 5px;
+            }
+
+            .after{
+                font-size: 16px;
+                font-style: normal;
+                color: rgb(100, 100, 100);
+                position: absolute;
+                top: 5px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="before"></div>
+            <img src="cover.jpg" alt="test" style="line-height: 50px;">
+            <div class="after">Broken Image of test</div>
+        </div>
+    </body>
+</html> -->
