@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <title>三列布局</title> -->
+        <title>自适应三列</title>
+        <style type="text/css">
+
+            /* .container{
+                height:100vh ;
+                width: 1000px;
+                margin: 0 auto;
+            }
+            .div1{
+                height: 100vh;
+                width: 200px;
+                float: left;
+                background-color: gold;
+            }
+            .div2{
+                height: 100vh;
+                width: 300px;
+                float: left;
+                background-color:blue;
+            }
+            .div3{
+                height: 100vh;
+                width: 500px;
+                float: left;
+                background-color:red;
+            } */
+            /* 左右定宽，中间自适应 */
+            .div1{
+                /* vh单位是指相对于视窗 */
+                height: 100vh;
+                width: 300px;
+                background-color: red;
+                float: left;
+            }
+            .div2{
+                height: 100vh;
+                margin-left: 300px;
+                margin-right: 300px;
+                background-color:blue; 
+            }
+
+            .div3{
+                height: 100vh;
+                width: 300px;
+                background-color:yellow;
+                float: right;
+            }
+
+        </style>
+    </head>
+    <body>
+        <!-- <div class="container"> -->
+            <div class="div1"></div>
+            <div class="div3"></div>
+            <div class="div2"></div>
+        <!-- </div> -->
+
+    </body>
+</html>

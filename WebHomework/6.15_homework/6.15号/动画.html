@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .container{
+                width: 200px;
+                height: 200px;
+                background-color: yellow;
+                /* margin: 100px auto; */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+
+                /* transition: 1s 1s all; */
+            }
+
+            /* .container:hover{
+                transform: rotate(45deg);
+                缩放倍数
+                transform: scale(1.2);
+            } */
+
+            @keyframes move{
+                0% {left: 0px;top: 0px;}
+                /* 0%{transform: translateX(0px);} */
+                33%{left: 170px;top: 0px;}
+                66%{left: 0px;top: 170px;}
+                100%{left: 170px;top: 170px;}   
+            }
+            .child{
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background-color: violet;
+                animation: move 2s infinite alternate forwards linear;
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <div class="container">
+            <div class="child"></div>
+        </div>
+    </body>
+</html>
