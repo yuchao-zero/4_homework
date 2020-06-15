@@ -4,26 +4,32 @@
     <head>
         <title>百度一下，你就知道</title>
         <style type="text/css">
+
+            div{
+                display: block;
+            }
+            
             .s-top-left {
                 height: 60px;
                 width: 439.94px;
                 position: absolute;
                 padding-left: 24px;
                 z-index: 100;
-                float: left;
+                top: 0;
+                left: 0;
             }
 
             .top-left{
                 position: relative;
                 color: #222;
                 font-family: 'PingFang SC',Arial,'Microsoft YaHei',sans-serif;
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 23px;
                 text-decoration: none;
                 float: left;
                 margin-right: 31px;
                 margin-top: 19px;
-                height: 17px;
+                /* width: 26px; */
             }
 
             a:hover{
@@ -42,7 +48,7 @@
             .top-right{
                 color: black;
                 font-family: 'PingFang SC',Arial,'Microsoft YaHei',sans-serif;
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 23px;
                 text-decoration: none;
                 float: right;
@@ -57,6 +63,10 @@
                 line-height: 24px;
                 text-align: center;
                 border-radius: 6px;
+            }
+
+            #kangjifeiyan{
+                color: red;
             }
 
             #kangjifeiyan:hover{
@@ -77,9 +87,9 @@
         </div>
 
         <div class="s-top-right">
-            <a class="top-right" id="log" style="color: white;">登陆</a>
+            <a class="top-right" id="log" style="color: white;">登录</a>
             <a class="top-right" href="">设置</a>
-            <a class="top-right" id="kangjifeiyan" href="https://voice.baidu.com/act/newpneumonia/newpneumonia/?from=osari_pc_1" style="color: red;" target="_blank" >抗击肺炎</a>
+            <a class="top-right" id="kangjifeiyan" href="https://voice.baidu.com/act/newpneumonia/newpneumonia/?from=osari_pc_1" target="_blank" >抗击肺炎</a>
         </div>
     </body>
 </html>
