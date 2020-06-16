@@ -4,7 +4,10 @@
     <head>
         <title>百度一下，你就知道</title>
         <style type="text/css">
-
+            *{
+                margin: 0;
+                padding: 0;
+            }
             div{
                 display: block;
             }
@@ -75,6 +78,50 @@
             #kangjifeiyan:hover{
                 color: #315efb;
             }
+            .search{
+                position: relative;
+                width: 654px;
+                height: 328.39px;
+                /* background-color: rosybrown; */
+                margin: 0 auto;
+            }
+            .img{
+                position: absolute;
+                width: 270px;
+                height: 129px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                top: 200.3px;
+            }
+            .form{
+                position: absolute;
+                width: 654px;
+                height: 44px;
+                /* background-color: rosybrown; */
+                border: 2px solid gainsboro;
+                box-sizing: border-box;
+                bottom: 0;
+                border-radius: 10px 10px 10px 10px;
+            }
+           
+            .input{
+                position: absolute;
+                width: 450px;
+                 top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%); 
+                margin-left: -78px;
+
+            }
+            .innersearch{
+                width: 108px;
+                height: 44px;
+                background-color: #4e6ef2;
+                float: right;
+                margin-top: -2px;
+                border-radius: 0 10px 10px 0;
+            }
         </style>
     </head>
 
@@ -93,6 +140,13 @@
             <a class="top-right" id="log" style="color: white;">登录</a>
             <a class="top-right" href="">设置</a>
             <a class="top-right" id="kangjifeiyan" href="https://voice.baidu.com/act/newpneumonia/newpneumonia/?from=osari_pc_1" target="_blank" >抗击肺炎</a>
+        </div>
+        <div class="search"><a href="https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_PclogoS_8whnvm25&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pcs" target="_blank">
+            <img src="./baidu.png" alt="" class="img"></a>
+            <form class="form">
+                <input type="text" class="input" style="display:none">
+                <div class="innersearch" style="color: white; line-height: 45px;text-align: center;">百度一下</div>
+            </form>
         </div>
     </body>
 </html>
