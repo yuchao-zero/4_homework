@@ -139,7 +139,7 @@
 
             .left{
                 width: 349px;
-                height: 768px;
+                height: 100vh;
                 border-bottom: 1px solid #e1e4e8;
                 border-right: 1px solid #e1e4e8;
                 float: left;
@@ -257,18 +257,34 @@
             }
 
             .mid{
-                padding-left: 16px;
-                padding-right: 16px;
-                margin-top: 16px;
                 width: 724px;
-                height: 768px;
+                height: 100vh;
                 float: left;
                 background-color: #f6f8fa;
                 border-bottom: 1px solid #e1e4e8;
             }
+
+            .mid-top{
+                width: 708px;
+                height: 234px;
+                border: 1px solid #e1e4e8;
+                border-radius: 3px;
+                margin-top: 32px;
+                margin-left: 16px;
+                background-color: #fff;
+            }
+
+            .mid-top-text{
+                width: 642px;
+                height: 170px;
+                margin-top: 31px;
+                margin-left: 32px;
+                /* background-color: aqua; */
+            }
+
             .right{
                 width: 366px;
-                height: 768px;
+                height: 100vh;
                 float: left;
                 background-color: #f6f8fa;
                 border-bottom: 1px solid #e1e4e8;
@@ -392,7 +408,15 @@
                 </div>
             </div>
         </div>
-        <div class="mid"></div>
+        <div class="mid">
+            <div class="mid-top">
+                <div class="mid-top-text">
+                    <h2 style="display: block;height: 60px;width: 642px;font-weight: 600; line-height: 1.25;text-align: left;font-size: 24px;">Discover interesting projects and people to populate your personal news feed.</h2>
+                    <p style="height: 60px;width: 642px;font-size: 16px;margin-top: 8px;">Your news feed helps you keep up with recent activity on repositories you <a class="text-watch" href="" style="color: #0366d6;text-decoration: none;">watch</a> and people you <a style="color: #0366d6;text-decoration: none;">follow</a>.</p>
+                    
+                </div>
+            </div>
+        </div>
         <div class="right"></div>
     </body>
 </html>
