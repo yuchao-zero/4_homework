@@ -3,7 +3,8 @@
 !*.java
 !*.md
 !*.jar
-!.gitignore
-!*html
+!*gitignore
+!*.html
 !*.txt
 !*.png
+!*.sql
