@@ -398,7 +398,7 @@ from emp e,dept d,(select deptno dno from emp e group by deptno) temp
 where e.deptno=d.deptno and temp.dno=d.deptno and e.job=(select job from emp where ename='SCOTT') and e.ename not like 'SCOTT';
 
 -- 列出每个部门工作的员工数量，平均工资、平均服务期限
-select count(*),avg(e.sal) from emp e group by e.deptno;
+select count(*),avg(e.sal),avg(datediff(curdate(),hiredate)) from emp e group by e.deptno;
 
 -- 列出各个部门MANAGER的最低薪金
 select deptno, min(sal)from emp where job='MANAGER' group by deptno;
